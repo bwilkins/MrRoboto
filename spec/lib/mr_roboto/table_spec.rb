@@ -13,27 +13,42 @@ module MrRoboto
       context 'given a position within the table\'s constraints' do
         it 'places a given object at the position requested' do
           table.place(robot, 4, 2)
-          expect(table[4, 2]).to eq robot
+          expect(table[4, 2]).to eq(robot)
         end
       end
     end
 
     describe '#move' do
-        context 'given that one space in the given direction will be a valid position' do
-          it 'moves the robot one space forward in the given direction' do
-            table.place(robot, 0, 0)
-            table.move(:north)
-            expect(table.items[robot]).to eq [0, 1]
-          end
+      context 'given that one space in the given direction will be a valid position' do
+        it 'moves the robot one space forward in the given direction' do
+          table.place(robot, 0, 0)
+          table.move(robot, :north)
+          expect(table.items[robot]).to eq({x: 0, y: 1})
         end
+      end
 
-        context 'given that one space in the given direction will not be a valid position' do
-          it 'does nothing' do
-            table.place(robot, 0, 0)
-            table.move(:south)
-            expect(table.items[robot]).to eq [0, 0]
-          end
+      context 'given that one space in the given direction will not be a valid position' do
+        it 'does nothing' do
+          table.place(robot, 0, 0)
+          table.move(robot, :south)
+          expect(table.items[robot]).to eq({x: 0, y: 0})
         end
+      end
+    end
+
+    describe '#position_of' do
+      context 'given an item that is in it\'s items array' do
+        it 'return that item\'s position' do
+          table.place(robot,3,3)
+          expect(table.position_of(robot)).to eq({x:3, y: 3})
+        end
+      end
+
+      context 'given an item that is not in it\'s items array' do
+        it 'returns nil' do
+          expect(table.position_of(robot)).to be nil
+        end
+      end
     end
 
     describe '#valid_position?' do
@@ -53,9 +68,9 @@ module MrRoboto
     describe '#[]' do
       context 'given a valid position' do
         it 'reports what is at the position given' do
-          expect(table[0, 0]).to eq nil
+          expect(table[0, 0]).to be nil
           table.place(robot, 0, 1)
-          expect(table[0, 1]).to eq robot
+          expect(table[0, 1]).to eq(robot)
         end
       end
       context 'given an invalid position' do
