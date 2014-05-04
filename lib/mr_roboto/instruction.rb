@@ -1,5 +1,7 @@
 #encoding: utf-8
 
+require 'mr_roboto/parameter_cleaner'
+
 module MrRoboto
   class Instruction
 
