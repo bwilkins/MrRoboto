@@ -49,5 +49,13 @@ module MrRoboto
 
     end
 
+    describe '#move' do
+      it 'asks the table to move it in the given heading' do
+        robot.place(1, 2, :south)
+        expect(table).to receive(:move).with(robot, :south)
+        robot.move
+      end
+    end
+
   end
 end

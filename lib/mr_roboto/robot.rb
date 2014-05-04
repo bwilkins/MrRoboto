@@ -20,5 +20,9 @@ module MrRoboto
       @heading = heading
     end
 
+    def move
+      @table.move(self, @heading)
+    end
+
   end
 end
