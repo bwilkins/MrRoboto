@@ -6,15 +6,6 @@ module MrRoboto
     def_delegators :@instructions, :each, :<<
     include Enumerable
 
-
-    def self.build_from_file(filename)
-      instruction_set = InstructionSet.new
-      File.new(filename).each do |line|
-        instruction_set << line
-      end
-      instruction_set
-    end
-
     def initialize(instructions = [])
       @instructions = instructions
     end

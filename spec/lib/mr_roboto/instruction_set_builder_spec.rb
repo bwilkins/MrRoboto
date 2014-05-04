@@ -3,10 +3,10 @@
 require_relative '../../spec_helper'
 require 'tempfile'
 
-require 'mr_roboto/instruction_set'
+require 'mr_roboto/instruction_set_builder'
 
 module MrRoboto
-  describe InstructionSet do
+  describe InstructionSetBuilder do
 
     describe '.build_from_file' do
       let(:filename) do
@@ -23,13 +23,20 @@ module MrRoboto
         filename.unlink
       end
 
+      let(:instruction_set) { InstructionSetBuilder.build_from_file(filename) }
+
       it 'returns an InstructionSet' do
-        expect(InstructionSet.build_from_file(filename)).to be_a InstructionSet
+        expect(instruction_set).to be_a InstructionSet
       end
 
       it 'has 3 members' do
-        expect(InstructionSet.build_from_file(filename)).to have(3).instructions
+        expect(instruction_set).to have(3).instructions
+        instruction_set.each do |instruction|
+          expect(instruction).to be_a Instruction
+        end
       end
+
+
     end
   end
 end
