@@ -16,12 +16,14 @@ module MrRoboto
     end
 
     def place(x, y, heading)
-      @table.place(x, y)
+      @table.place(self, x, y)
       @heading = heading
+      nil
     end
 
     def move
       @table.move(self, @heading)
+      nil
     end
 
     def left
@@ -35,6 +37,7 @@ module MrRoboto
       when :west
         :south
       end
+      nil
     end
 
     def right
@@ -48,6 +51,11 @@ module MrRoboto
       when :west
         :north
       end
+      nil
+    end
+
+    def perform_instruction(instruction)
+      self.public_send(instruction.command, *instruction.parameters)
     end
 
     private

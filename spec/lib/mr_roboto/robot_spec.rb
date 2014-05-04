@@ -42,7 +42,7 @@ module MrRoboto
 
       context 'when the position given is within the bounds of the table' do
         it 'places the robot on the table' do
-          expect(table).to receive(:place).with(4, 2)
+          expect(table).to receive(:place).with(robot, 4, 2)
           robot.place(4,2,:east)
         end
       end
@@ -90,6 +90,21 @@ module MrRoboto
           robot.right
           expect(robot.heading).to be nil
         end
+      end
+    end
+
+    describe '#perform_instruction' do
+      let(:instruction) { double('Instruction') }
+      let(:command) { :place }
+      let(:parameters) { [1, 2, :north] }
+      before do
+        expect(instruction).to receive(:command).and_return(command)
+        expect(instruction).to receive(:parameters).and_return(parameters)
+      end
+
+      it 'takes the command and parameters from an instruction and calls them' do
+        expect(robot).to receive(:place).with(*parameters)
+        robot.perform_instruction(instruction)
       end
     end
 
