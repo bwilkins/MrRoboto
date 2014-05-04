@@ -5,11 +5,17 @@ require 'mr_roboto/robot'
 
 module MrRoboto
   describe Robot do
+    let(:table) { double('Table') }
+    let(:robot) { Robot.new(table) }
+
+    before do
+      allow(table).to receive(:place)
+      allow(table).to receive(:move)
+      allow(table).to receive(:position_of).with(robot)
+    end
 
     describe '#report' do
-      let(:robot) { Robot.new }
       let(:report) { robot.report }
-
       context 'when no other instructions given' do
         it 'returns a no-instructions message' do
           expect(report).to eq 'No other instructions given!'
@@ -24,7 +30,7 @@ module MrRoboto
         end
 
         it 'reports the current position and heading/facing of the robot' do
-          skip
+          expect(table).to receive(:position_of).with(robot).and_return({x: 0, y: 0})
           robot.place(0,0,:north)
           expect(report).to eq '0,0,NORTH'
         end
@@ -33,13 +39,11 @@ module MrRoboto
     end
 
     describe '#place' do
-      let(:robot) { Robot.new }
 
       context 'when the position given is within the bounds of the table' do
         it 'places the robot on the table' do
-          skip
+          expect(table).to receive(:place).with(4, 2)
           robot.place(4,2,:east)
-
         end
       end
 
