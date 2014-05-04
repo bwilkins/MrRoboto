@@ -2,15 +2,17 @@
 
 require_relative '../spec_helper'
 
-describe 'MrRoboto' do
+require 'mr_roboto/runner'
+
+describe MrRoboto::Runner do
 
   context 'when given a non-existent file' do
     let(:args) { [input_filename] }
     let(:input_filename) { 'foobar' }
 
 
-    it 'will execute and return the expected output' do
-      expect(MrRoboto::Runner.new.run(args)).to == "No such file or directory #{input_filename}"
+    it 'will return a file-missing error' do
+      expect(MrRoboto::Runner.new.run(args)).to eq "No such file or directory #{input_filename}"
     end
   end
 
