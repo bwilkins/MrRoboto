@@ -26,7 +26,10 @@ module MrRoboto
       it 'returns an InstructionSet' do
         expect(InstructionSet.build_from_file(filename)).to be_a InstructionSet
       end
-    end
 
+      it 'has 3 members' do
+        expect(InstructionSet.build_from_file(filename)).to have(3).instructions
+      end
+    end
   end
 end
