@@ -30,7 +30,7 @@ module MrRoboto
         end
 
         it 'reports the current position and heading/facing of the robot' do
-          expect(table).to receive(:position_of).with(robot).and_return({x: 0, y: 0})
+          expect(table).to receive(:position_of).with(robot).and_return({x: 0, y: 0}).at_least(3).times
           robot.place(0,0,:north)
           expect(report).to eq '0,0,NORTH'
         end

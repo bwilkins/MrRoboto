@@ -9,9 +9,7 @@ module MrRoboto
     end
 
     def report
-      position = @table.position_of(self)
       return 'No other instructions given!' unless position
-
       "#{position[:x]},#{position[:y]},#{@heading.upcase}"
     end
 
@@ -24,5 +22,10 @@ module MrRoboto
       @table.move(self, @heading)
     end
 
+    private
+  
+    def position
+      @table.position_of(self)
+    end
   end
 end
