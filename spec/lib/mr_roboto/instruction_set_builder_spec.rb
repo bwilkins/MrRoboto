@@ -9,7 +9,7 @@ module MrRoboto
   describe InstructionSetBuilder do
 
     describe '.build_from_file' do
-      let(:filename) do
+      let(:file) do
         f = Tempfile.new('instructions')
         f.write("PLACE 0, 0, NORTH\n")
         f.write("MOVE\n")
@@ -18,15 +18,17 @@ module MrRoboto
         f
       end
 
+      let(:filename) { file.path }
+
       after :each do
-        filename.close
-        filename.unlink
+        file.close
+        file.unlink
       end
 
       let(:instruction_set) { InstructionSetBuilder.build_from_file(filename) }
 
-      it 'returns an InstructionSet' do
-        expect(instruction_set).to be_a InstructionSet
+      it 'returns an Array' do
+        expect(instruction_set).to be_a Array
       end
 
       it 'has 3 members' do
