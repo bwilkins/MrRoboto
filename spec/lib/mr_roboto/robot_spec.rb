@@ -57,5 +57,41 @@ module MrRoboto
       end
     end
 
+    describe '#left' do
+      context 'when the robot already has a heading' do
+        it 'changes the heading 90 degrees anti-clockwise from it\'s original heading' do
+          robot.place(0, 0, :north)
+          robot.left
+          expect(robot.heading).to eq :west
+        end
+      end
+
+      context 'when the robot has no heading (not on the table)' do
+        it 'does nothing' do
+          expect(robot.heading).to be nil
+          robot.left
+          expect(robot.heading).to be nil
+        end
+      end
+    end
+
+    describe '#right' do
+      context 'when the robot already has a heading' do
+        it 'changes the heading 90 degrees anti-clockwise from it\'s original heading' do
+          robot.place(0, 0, :north)
+          robot.right
+          expect(robot.heading).to eq :east
+        end
+      end
+
+      context 'when the robot has no heading (not on the table)' do
+        it 'does nothing' do
+          expect(robot.heading).to be nil
+          robot.right
+          expect(robot.heading).to be nil
+        end
+      end
+    end
+
   end
 end

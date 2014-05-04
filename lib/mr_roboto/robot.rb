@@ -3,6 +3,8 @@
 module MrRoboto
   class Robot
 
+    attr_reader :heading
+
     def initialize(table)
       @table = table
       @heading = nil
@@ -20,6 +22,32 @@ module MrRoboto
 
     def move
       @table.move(self, @heading)
+    end
+
+    def left
+      @heading = case @heading
+      when :north
+        :west
+      when :south
+        :east
+      when :east
+        :north
+      when :west
+        :south
+      end
+    end
+
+    def right
+      @heading = case @heading
+      when :north
+        :east
+      when :south
+        :west
+      when :east
+        :south
+      when :west
+        :north
+      end
     end
 
     private
