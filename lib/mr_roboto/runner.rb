@@ -20,7 +20,6 @@ module MrRoboto
       ret = []
       
       instructions.each do |instruction|
-        puts "#{instruction.parameters}"
         ret << robot.perform_instruction(instruction)
       end
 
