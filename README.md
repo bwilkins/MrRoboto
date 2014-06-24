@@ -6,4 +6,4 @@ This is an example of a "Toy Robot Simulator". It reads instruction files to dir
 
 ### Why are you doing this?
 
-I'd like the opportunity to get hired at Locomote.
+Originally, this was for Locomote's coding challenge. Can be used as a coding ability reference, or for heckling over how terribly I've done.
